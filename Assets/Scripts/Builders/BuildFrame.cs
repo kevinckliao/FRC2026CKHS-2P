@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Users; //kevin: needed for InputUser
 using UnityEngine.Serialization;
 using Util;
 
@@ -108,28 +109,45 @@ public class BuildFrame : MonoBehaviour
         }
     }
 
-    public SwerveController GetSwerveController()
+    public SwerveController GetSwerveController(int idGamePad)
     {
-        if (_swerve == null)
+        //if (_swerve == null)
+        //{
+        // 1. Load the asset
+        _inputAsset = Resources.Load("Controls/Builder") as InputActionAsset;
+        var playerInput = Utils.TryGetAddComponent<PlayerInput>(gameObject);
+
+        //2 Assign the action
+        playerInput.actions = Instantiate(_inputAsset);
+
+        // 3. Setup Pairing
+        if (Gamepad.all.Count > idGamePad)
         {
-            _inputAsset = Resources.Load("Controls/Builder") as InputActionAsset;
-            var playerInput = Utils.TryGetAddComponent<PlayerInput>(gameObject);
-            playerInput.actions = _inputAsset;
-            playerInput.neverAutoSwitchControlSchemes = true;
-            playerInput.defaultControlScheme = playerNumber;
-            playerInput.notificationBehavior = PlayerNotifications.InvokeUnityEvents;
-            _swerve = Utils.TryGetAddComponent<SwerveController>(gameObject);
-            var rb = Utils.TryGetAddComponent<Rigidbody>(gameObject);
-            rb.collisionDetectionMode = CollisionDetectionMode.Discrete;
-            rb.interpolation = RigidbodyInterpolation.None;
-            rb.mass = robotWeight;
-            rb.drag = 0.5f;
-            rb.angularDrag = 0.05f;
-            _swerve.rb = rb;
-            _swerve.gearRatio = gearRatio;
-            _swerve.wheelDiameter = _moduleWheelDiameters[(int)moduleType];
+            var targetDevice = Gamepad.all[idGamePad];
+
+            // Important: Unpair any existing devices first to clear "listen to all"
+            playerInput.user.UnpairDevices();
+
+            // Perform the explicit pairing
+            InputUser.PerformPairingWithDevice(targetDevice, playerInput.user);
+
+            // 4. Activate the specific Control Scheme
+            // Ensure "Gamepad" matches the name of the scheme in your Input Action Asset
+            playerInput.user.ActivateControlScheme("Player1");
         }
-        
+        playerInput.neverAutoSwitchControlSchemes = true;
+        playerInput.notificationBehavior = PlayerNotifications.InvokeUnityEvents;
+        _swerve = Utils.TryGetAddComponent<SwerveController>(gameObject);
+        var rb = Utils.TryGetAddComponent<Rigidbody>(gameObject);
+        rb.collisionDetectionMode = CollisionDetectionMode.Discrete;
+        rb.interpolation = RigidbodyInterpolation.None;
+        rb.mass = robotWeight;
+        rb.drag = 0.5f;
+        rb.angularDrag = 0.05f;
+        _swerve.rb = rb;
+        _swerve.gearRatio = gearRatio;
+        _swerve.wheelDiameter = _moduleWheelDiameters[(int)moduleType];
+        //}
         return _swerve;
     }
 

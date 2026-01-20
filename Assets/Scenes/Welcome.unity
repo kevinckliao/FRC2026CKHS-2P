@@ -248,7 +248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8238993, g: 0.6884583, b: 0.05959013, a: 0.76862746}
+  m_Color: {r: 0.8238993, g: 0.6884583, b: 0.05959013, a: 0.6431373}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -661,9 +661,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "[ FRC2026 TRAINER ] for CKHS -  Sponsored by Kevin Liao\n\n[MOVE] \tJOYSTICK-LEFT,\tWASD\n[TURN]
-    \tJoystick-Right\tJL\n[SHOOT] \tTrigger-RIGHT\tSPACE\n[INTAKE] \tTrigger-LEFT\tSHIFT@LEFT\n[PLAY]\tButton-X\t\tSPACE\n[EXIT]
-    \t\t\t\tWIN+TAB -> [X]\n\nNote: Field-Centric Drive, SCORE=0 on NO-SHOOT, @AUTO
-    BLUE  won.\n\n"
+    \tJoystick-Right\tJL\n[SHOOT] \tTrigger-RIGHT\tSPACE\n[INTAKE] \tTrigger-LEFT\tSHIFT@LEFT\n[PLAY]\tButton-X\t\tSPACE\n[REPLAY]
+    \tR\t\t\t[EXIT] \tWIN+TAB -> TOP-RIGHT [X]\n\nNote: Field-Centric Drive, SCORE=0
+    on NO-SHOOT, @AUTO BLUE  won.\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
   m_sharedMaterial: {fileID: 2140474, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}

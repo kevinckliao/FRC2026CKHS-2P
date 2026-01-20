@@ -472,7 +472,7 @@
                     "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "StickDeadzone",
-                    "groups": "",
+                    "groups": "Player1",
                     "action": "LeftStick",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -736,7 +736,7 @@
                     "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Player1",
                     "action": "LeftTrigger",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -747,7 +747,7 @@
                     "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Player1",
                     "action": "RightTrigger",
                     "isComposite": false,
                     "isPartOfComposite": false
